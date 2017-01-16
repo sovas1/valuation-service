@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -39,9 +41,11 @@ public class CsvReaderTest {
         IntStream.range(0, expectedSize).forEach(i -> assertEquals(expected.get(i), actual.get(i)));
     }
 
-    @Test(expected = IOException.class)
-    public void test_Read_Csv_expect_IO_Exception() {
-        reader.readLines("wrong/path");
+    @Test
+    public void test_Read_Csv_expect_Empty_List_when_Path_is_Wrong_Exception() {
+        List<String> actual = reader.readLines("wrong/path");
+        assertNotNull(actual);
+        assertTrue(actual.isEmpty());
     }
 
 }

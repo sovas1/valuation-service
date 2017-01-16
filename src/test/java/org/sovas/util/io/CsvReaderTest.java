@@ -1,8 +1,9 @@
-package org.sovas;
+package org.sovas.util.io;
 
 import com.google.common.io.Resources;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sovas.Application;
 import org.sovas.util.io.CsvReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

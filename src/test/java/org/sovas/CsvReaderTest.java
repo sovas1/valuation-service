@@ -1,5 +1,6 @@
 package org.sovas;
 
+import com.google.common.io.Resources;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sovas.util.io.CsvReader;
@@ -7,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,7 +24,7 @@ public class CsvReaderTest {
     @Autowired
     private CsvReader reader;
 
-    private final String PATH_CURRENCIES = "currencies (1) (3) (2).csv";
+    private final String PATH_CURRENCIES = Resources.getResource("currencies.csv").getFile();
 
     @Test
     public void test_Read_Csv_Currencies_GBP_EU_PLN() {

@@ -71,7 +71,7 @@ public class CsvParserTest {
 
         // then
         assertNotNull(currencies);
-        assertEquals(3, currencies.size());
+        assertEquals(this.currencies.size(), currencies.size());
         assertTrue(currencies.stream().anyMatch(e -> e.getCurrency().equals("GBP")));
     }
 
@@ -86,9 +86,9 @@ public class CsvParserTest {
 
         // then
         assertNotNull(matchings);
-        assertEquals(3, matchings.size());
+        assertEquals(this.matchings.size(), matchings.size());
         // TODO: 18.01.2017 assert value
-        IntStream.range(0,3)
+        IntStream.range(0, this.matchings.size())
                 .forEach(i -> assertEquals(i, matchings.get(i).getId().intValue()));
     }
 
@@ -103,7 +103,7 @@ public class CsvParserTest {
 
         // then
         assertNotNull(products);
-        assertEquals(9, products.size());
+        assertEquals(this.products.size(), products.size());
         // TODO: 18.01.2017 deeper tests
     }
 

@@ -4,7 +4,6 @@ import com.google.common.io.Resources;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sovas.Application;
-import org.sovas.util.io.CsvReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,13 +22,13 @@ import static org.junit.Assert.assertTrue;
 public class CsvReaderTest {
 
     @Autowired
-    private CsvReader reader;
+    private CsvFileUtils fileUtils;
 
     private final String PATH_CURRENCIES = Resources.getResource("currencies.csv").getFile();
 
     @Test
     public void test_Read_Csv_Currencies_GBP_EU_PLN() {
-        List<String> actual = reader.readLines(PATH_CURRENCIES);
+        List<String> actual = fileUtils.readLines(PATH_CURRENCIES);
 
         assertNotNull(actual);
 
@@ -43,7 +42,7 @@ public class CsvReaderTest {
 
     @Test
     public void test_Read_Csv_expect_Empty_List_when_Path_is_Wrong_Exception() {
-        List<String> actual = reader.readLines("wrong/path");
+        List<String> actual = fileUtils.readLines("wrong/path");
         assertNotNull(actual);
         assertTrue(actual.isEmpty());
     }

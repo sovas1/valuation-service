@@ -15,6 +15,9 @@ public class Product {
     private Integer quantity;
     private Integer matchingId;
 
+    public Product() {
+    }
+
     public Product(Integer id, Integer price, Currency currency, Integer quantity, Integer matchingId) {
         this.id = id;
         this.price = price;
@@ -43,7 +46,23 @@ public class Product {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public void setMatchingId(Integer matchingId) {
+        this.matchingId = matchingId;
     }
 }

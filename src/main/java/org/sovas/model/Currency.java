@@ -3,8 +3,10 @@ package org.sovas.model;
 public class Currency {
 
     private String currency;
-
     private Double ratio;
+
+    public Currency() {
+    }
 
     public Currency(String currency, Double ratio) {
         this.currency = currency;

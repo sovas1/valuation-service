@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CsvReader {
+public class CsvFileUtils {
 
     public List<String> readLines(final String path) {
         List<String> data = new ArrayList<>();

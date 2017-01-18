@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -48,7 +51,10 @@ public class CsvParserTest {
 
         List<Currency> currencies = parser.toCurrencies(linesMock);
 
-        System.out.println();
+        assertNotNull(currencies);
+        assertEquals(3, currencies.size());
+        assertTrue(currencies.stream().anyMatch(e -> e.getCurrency().equals("GBP")));
+
     }
 
 }

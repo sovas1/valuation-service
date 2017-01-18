@@ -32,27 +32,16 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class CsvParserTest {
 
-    // TODO: 18.01.2017 deeper tests
-
     @Autowired
     private CsvParser parser;
-
-    @MockBean
-    private CsvFileUtils fileUtils;
 
     private List<String> mockCurrencies = Stream.of("GBP,2.4", "EU,2.1", "PLN,1").collect(Collectors.toList());
     private List<String> mockMatchings = Stream.of("1,2", "2,2", "3,3").collect(Collectors.toList());
     private List<String> mockProducts = Stream.of(
             "1,1000,GBP,2,3",
             "2,1050,EU,1,1",
-            "3,2000,PLN,1,1",
-            "4,1750,EU,2,2",
-            "5,1400,EU,4,3",
-            "6,7000,PLN,3,2",
-            "7,630,GBP,5,3",
-            "8,4000,EU,1,3",
-            "9,1400,GBP,3,1")
-            .collect(Collectors.toList());
+            "3,2000,PLN,1,1"
+    ).collect(Collectors.toList());
 
 
     @Before
@@ -63,44 +52,55 @@ public class CsvParserTest {
     @Test
     public void testParseToCurrencies() {
         // given
+        final List<Currency> expected = Stream.of(
+                new Currency("GBP", 2.4),
+                new Currency("EU", 2.1),
+                new Currency("PLN", 1.0)
+        ).collect(Collectors.toList());
 
         // when
-        List<Currency> currencies = parser.toCurrencies(mockCurrencies);
+        List<Currency> actual = parser.toCurrencies(mockCurrencies);
 
         // then
-        assertNotNull(currencies);
-        assertEquals(this.mockCurrencies.size(), currencies.size());
-        assertTrue(currencies.stream().anyMatch(e -> e.getCurrency().equals("GBP")));
+        assertNotNull(actual);
+        assertEquals(expected.size(), actual.size());
+        assertEquals(expected, actual);
     }
 
     @Test
     public void testParseToMatchings() {
         // given
+        final List<Matching> expected = Stream.of(
+                new Matching(1, 2),
+                new Matching(2, 2),
+                new Matching(3, 3)
+        ).collect(Collectors.toList());
 
         // when
-        List<Matching> matchings = parser.toMatchings(mockMatchings);
+        List<Matching> actual = parser.toMatchings(mockMatchings);
 
         // then
-        assertNotNull(matchings);
-        assertEquals(this.mockMatchings.size(), matchings.size());
-        // TODO: 18.01.2017 assert value
-        IntStream.range(0, this.mockMatchings.size())
-                .forEach(i -> assertEquals(i, matchings.get(i).getId().intValue()));
+        assertNotNull(actual);
+        assertEquals(expected.size(), actual.size());
+        assertEquals(expected, actual);
     }
 
     @Test
     public void testParseToProducts() {
         // given
+        final List<Product> expected = Stream.of(
+                new Product(1, 1000, new Currency("GBP", 2.4), 2, 3),
+                new Product(2, 1050, new Currency("EU", 2.1), 1, 1),
+                new Product(3, 2000, new Currency("PLN", 1.0), 1, 1)
+        ).collect(Collectors.toList());
 
         // when
-        List<Product> products = parser.toProducts(mockProducts);
+        List<Product> actual = parser.toProducts(mockProducts);
 
         // then
-        assertNotNull(products);
-        assertEquals(this.mockProducts.size(), products.size());
-        // TODO: 18.01.2017 deeper tests
+        assertNotNull(actual);
+        assertEquals(expected.size(), actual.size());
+        assertEquals(expected, actual);
     }
-
-
 
 }

@@ -1,7 +1,9 @@
 package org.sovas.util.parser;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sovas.cache.CurrencyCache;
 import org.sovas.model.Currency;
 import org.sovas.model.Matching;
 import org.sovas.model.Product;
@@ -31,14 +33,19 @@ public class CsvParserTest {
             "3,2000,PLN,1,1"
     ).collect(Collectors.toList());
 
-    @Test
-    public void testParseToCurrencies() {
-        // given
-        final List<Currency> expected = Stream.of(
+    @Before
+    public void setUp() {
+        CurrencyCache.setCurrencies(Stream.of(
                 new Currency("GBP", 2.4),
                 new Currency("EU", 2.1),
                 new Currency("PLN", 1.0)
-        ).collect(Collectors.toList());
+        ).collect(Collectors.toList()));
+    }
+
+    @Test
+    public void test_Parse_To_Currencies() {
+        // given
+        final List<Currency> expected = CurrencyCache.getCurrencies();
 
         // when
         List<Currency> actual = parser.toCurrencies(mockCurrencies);
@@ -50,7 +57,7 @@ public class CsvParserTest {
     }
 
     @Test
-    public void testParseToMatchings() {
+    public void test_Parse_To_Matchings() {
         // given
         final List<Matching> expected = Stream.of(
                 new Matching(1, 2),
@@ -68,7 +75,7 @@ public class CsvParserTest {
     }
 
     @Test
-    public void testParseToProducts() {
+    public void test_Parse_To_Products() {
         // given
         final List<Product> expected = Stream.of(
                 new Product(1, 1000, new Currency("GBP", 2.4), 2, 3),

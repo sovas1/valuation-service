@@ -9,6 +9,8 @@
     <version>1.0</version>
 
     <properties>
+        <!-- The main class to start by executing java -jar -->
+        <start-class>org.sovas.Application</start-class>
         <!--java-->
         <java.version>1.8</java.version>
         <!--frameworks-->
@@ -43,6 +45,12 @@
 
     <build>
         <plugins>
+            <!--spring boot-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--java-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -67,17 +75,16 @@
                     </archive>
                 </configuration>
             </plugin>
-
+            <!--docker-->
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker.maven.plugin.version}</version>
-
                 <configuration>
                     <images>
                         <image>
                             <alias>service</alias>
-                            <name>sovas/${artifactId}</name>
+                            <name>sovas/${project.artifactId}</name>
                             <build>
                                 <dockerFileDir>${project.basedir}</dockerFileDir>
                             </build>

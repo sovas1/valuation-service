@@ -38,4 +38,13 @@ public class Currency {
         result = 31 * result + (ratio != null ? ratio.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Currency{" +
+                "currency='" + currency + '\'' +
+                ", ratio=" + ratio +
+                '}';
+    }
+
 }

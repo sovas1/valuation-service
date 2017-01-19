@@ -4,7 +4,7 @@ import static java.util.Comparator.comparingDouble;
 
 public class Product {
 
-    // TODO: 18.01.2017 builder
+    // TODO: 18.01.2017 builder || lombok
 
     public static class Comparator {
         public static java.util.Comparator<Product> byTotalPrice =
@@ -90,5 +90,16 @@ public class Product {
         result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
         result = 31 * result + (matchingId != null ? matchingId.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", price=" + price +
+                ", currency=" + currency +
+                ", quantity=" + quantity +
+                ", matchingId=" + matchingId +
+                '}';
     }
 }
